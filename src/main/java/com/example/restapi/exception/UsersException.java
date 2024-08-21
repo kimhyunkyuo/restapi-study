@@ -1,9 +1,9 @@
 package com.example.restapi.exception;
 
-public class UserException extends RuntimeException{
+public class UsersException extends RuntimeException{
     private ErrorCode errorCode;
 
-    public UserException(ErrorCode errorCode){
+    public UsersException(ErrorCode errorCode){
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }

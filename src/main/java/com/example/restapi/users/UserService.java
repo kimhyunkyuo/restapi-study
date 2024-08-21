@@ -2,7 +2,7 @@ package com.example.restapi.users;
 
 import com.example.restapi.exception.ErrorCode;
 import com.example.restapi.exception.LogicException;
-import com.example.restapi.exception.UserException;
+import com.example.restapi.exception.UsersException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +35,22 @@ public class UserService {
     public User getUserById(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {
-            throw new UserException(ErrorCode.NOTFOUND);
+            throw new UsersException(ErrorCode.NOTFOUND);
         } else {
             return optionalUser.get();
         }
+    }
+    public User updateuUser(User user){
 
+        User emailUser = userRepository.findByEmail(user.getEmail());
+        if(emailUser == null){
+            throw new UsersException(ErrorCode.NOTUPDATEEMAIL);
+        }
+        emailUser.setWdate(user.getWdate());
+        emailUser.setUsername(user.getUsername());
+        emailUser.setPassword(user.getPassword());
+        emailUser.setGender(user.getGender());
+        User dbUser = userRepository.save(user);
+        return dbUser;
     }
 }
