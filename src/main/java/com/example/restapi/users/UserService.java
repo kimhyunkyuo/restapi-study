@@ -53,4 +53,12 @@ public class UserService {
         User dbUser = userRepository.save(user);
         return dbUser;
     }
+
+    public void delete(Long id) {
+        Optional<User> dbUser = userRepository.findById(id);
+        if(dbUser.isEmpty()){
+            throw new UsersException(ErrorCode.NOTFOUND);
+        }
+        userRepository.delete(dbUser.get());
+    }
 }

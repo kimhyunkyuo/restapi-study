@@ -19,7 +19,9 @@
         fetch(url,
             {
                 method:"delete",
-                headers:{ 'Content-Type': 'application/json'}
+                headers:{ 'Content-Type': 'application/json',
+                        'version' : '1'
+                    },
             })
             .then(res => {
                 return res.text();

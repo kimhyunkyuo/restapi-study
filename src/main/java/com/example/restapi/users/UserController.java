@@ -57,7 +57,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(new User());
     }
     @DeleteMapping("users/{id}")
-    public ResponseEntity<String> deleteUser(){
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+        userService.delete(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("삭제됨");
     }
 
